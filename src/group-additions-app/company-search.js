@@ -1,12 +1,18 @@
 import { LitElement, html } from "lit-element";
 import '@vaadin/vaadin-combo-box/vaadin-combo-box';
+import { spanStyles, divStyles } from '../group-additions-app/group-addition-styles';
 
 class CompanySearch extends LitElement {
     static get properties() {
         return {
-            disabled: { type: Boolean },
-            value :{type:String}
+            value: { type: String }
         };
+    }
+    static get styles() {
+        return [
+            spanStyles,
+            divStyles
+        ]
     }
     constructor() {
         super();
@@ -24,7 +30,7 @@ class CompanySearch extends LitElement {
                 if (this.filter.length > 4) {
                     var companySearchURL = window.location.protocol + "//" + window.location.hostname + ":"
                         + window.location.port
-                        + "/" + window.location.pathname
+                        + window.location.pathname
                         + "/api/CompanySearch/GetCompanySearchResults?searchString=" + this.filter;
                     xhr.open('GET', companySearchURL, true);
                     xhr.send();
@@ -37,7 +43,7 @@ class CompanySearch extends LitElement {
             this.comboBox.renderer = function (root, combobox, model) {
                 root.__dataHost.focused = false;
                 if (model.item == 'No records found') {
-                    root.innerHTML = '<small>Your search fetched no results!</small>';
+                    root.innerHTML = '<small>No companies were found with the search criteria provided!</small>';
                 }
                 else {
                     var regex = new RegExp(this._comboBox.filter, 'gi');
@@ -66,22 +72,32 @@ class CompanySearch extends LitElement {
     }
     render() {
         return html`
-          <vaadin-combo-box label = "Company Search" 
-                            vaadin-combo-box-overlay-max-height = "250px"
+            <dom-module id="custom-combo-box-icon" theme-for="vaadin-combo-box">
+            <template>
+             <style>
+                :host([theme~="custom-icon"]) [part="toggle-button"]{
+                display:none;
+                }
+            </style>
+            </template>
+            </dom-module>
+            <div class="formControlGroup">
+                <div><span class="simpleHeader">Company Search</span></div>
+                <vaadin-combo-box 
                             item-label-path = "companyName"
                             item-value-path = "companyId"
                             placeholder="Search for a company using Name, Tax ID or Group Number"
                             style = "width:550px"
-                            loading = 'false'
                             @selected-item-changed = "${this.onCompanySelection}"
-                            clear-button-visible                            
-                            ?disabled = "${this.disabled}"
-                            .value = "${this.value}">
-            </vaadin-combo-box>  
-            <div style="color:Grey; font-size : 13px;font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 
-                            'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'">
+                            clear-button-visible 
+                            .value = "${this.value}"
+                            theme="custom-icon">
+                </vaadin-combo-box>  
+                <div class="lightGreySmallNote">
                     To search by Tax ID , use the format 'xx-xxxxxxx'. 
-             </div>
+                </div>
+            </div>
+        </div>
         `;
     }
     onCompanySelection(e) {

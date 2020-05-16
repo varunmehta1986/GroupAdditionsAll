@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<testsuite name="HeadlessChrome 79.0.3945 (Windows 10.0.0)" package="" timestamp="2020-02-27T16:49:45" id="0" hostname="A307084L" tests="10" errors="0" failures="1" time="2.468">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/79.0.3945.130 Safari/537.36"/>
+  </properties>
+  <testcase name="Group Additions App should hide application type selection on load" time="0.534" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).Group Additions App"/>
+  <testcase name="Group Additions App should hide the redirect dialog on load" time="0.151" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).Group Additions App"/>
+  <testcase name="Group Additions App should hide the application types selection on load" time="0.244" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).Group Additions App"/>
+  <testcase name="Group Additions App should reset the application form when the old application redirect dialog is closed" time="0.239" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).Group Additions App"/>
+  <testcase name="Group Additions App should disable/enable search when the disabled changed event occurs." time="0.175" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).Group Additions App"/>
+  <testcase name="Group Additions App should show the redirect dialog if it's an old application form" time="0.211" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).Group Additions App"/>
+  <testcase name="Group Additions App should show the application type selection if it's a combined app" time="0.237" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).Group Additions App"/>
+  <testcase name="Group Additions App should show the application type selection if it's a combined app" time="0.235" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).Group Additions App"/>
+  <testcase name="Group Additions App should show the company selections when an application type has been selected" time="0.21" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).Group Additions App">
+    <failure type="">AssertionError: expected false to equal true
+    at Context.&lt;anonymous&gt; (test/group-additions-app/group-additions-app.test.js:85:40)
+</failure>
+  </testcase>
+  <testcase name="Group Additions App should hide the company selections when an application type has not been selected" time="0.232" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).Group Additions App"/>
+  <system-out>
+    <![CDATA[HeadlessChrome 79.0.3945 (Windows 10.0.0) WARN: 'Warning: unable to determine the label for the provided `value`. Nothing to display in the text field. This usually happens when setting an initial `value` before any items are returned from the `dataProvider` callback. Consider setting `selectedItem` instead of `value`'
+,HeadlessChrome 79.0.3945 (Windows 10.0.0) WARN: 'Warning: unable to determine the label for the provided `value`. Nothing to display in the text field. This usually happens when setting an initial `value` before any items are returned from the `dataProvider` callback. Consider setting `selectedItem` instead of `value`'
+,HeadlessChrome 79.0.3945 (Windows 10.0.0) WARN: 'Warning: unable to determine the label for the provided `value`. Nothing to display in the text field. This usually happens when setting an initial `value` before any items are returned from the `dataProvider` callback. Consider setting `selectedItem` instead of `value`'
+,HeadlessChrome 79.0.3945 (Windows 10.0.0) WARN: 'Warning: unable to determine the label for the provided `value`. Nothing to display in the text field. This usually happens when setting an initial `value` before any items are returned from the `dataProvider` callback. Consider setting `selectedItem` instead of `value`'
+,HeadlessChrome 79.0.3945 (Windows 10.0.0) WARN: 'Warning: unable to determine the label for the provided `value`. Nothing to display in the text field. This usually happens when setting an initial `value` before any items are returned from the `dataProvider` callback. Consider setting `selectedItem` instead of `value`'
+,HeadlessChrome 79.0.3945 (Windows 10.0.0) WARN: 'Warning: unable to determine the label for the provided `value`. Nothing to display in the text field. This usually happens when setting an initial `value` before any items are returned from the `dataProvider` callback. Consider setting `selectedItem` instead of `value`'
+,HeadlessChrome 79.0.3945 (Windows 10.0.0) WARN: 'Warning: unable to determine the label for the provided `value`. Nothing to display in the text field. This usually happens when setting an initial `value` before any items are returned from the `dataProvider` callback. Consider setting `selectedItem` instead of `value`'
+,HeadlessChrome 79.0.3945 (Windows 10.0.0) WARN: 'Warning: unable to determine the label for the provided `value`. Nothing to display in the text field. This usually happens when setting an initial `value` before any items are returned from the `dataProvider` callback. Consider setting `selectedItem` instead of `value`'
+,HeadlessChrome 79.0.3945 (Windows 10.0.0) WARN: 'Warning: unable to determine the label for the provided `value`. Nothing to display in the text field. This usually happens when setting an initial `value` before any items are returned from the `dataProvider` callback. Consider setting `selectedItem` instead of `value`'
+,HeadlessChrome 79.0.3945 (Windows 10.0.0) WARN: 'Warning: unable to determine the label for the provided `value`. Nothing to display in the text field. This usually happens when setting an initial `value` before any items are returned from the `dataProvider` callback. Consider setting `selectedItem` instead of `value`'
+
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>

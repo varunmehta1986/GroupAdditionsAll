@@ -1,56 +1,97 @@
 import { LitElement, html, css } from "lit-element";
 import '@vaadin/vaadin-button';
 import '@vaadin/vaadin-upload';
-import '@polymer/iron-icons/iron-icons.js';
-import './add-new-requirement-document';
+import '@polymer/iron-icons/iron-icons';
+import './add-requirement-document';
+import '@vaadin/vaadin-ordered-layout/vaadin-horizontal-layout';
+import '@vaadin/vaadin-ordered-layout/vaadin-vertical-layout';
+import {divStyles} from '../../group-addition-styles';
 
 class UploadRequirementDocument extends LitElement {
 
-    static get properties(){
-        return{
-            hideAddRequirement:{type: Boolean},
-            items:{type: Array},
-            index:{type: Number}          
-        }
+    static get properties() {
+        return {
+            index: { type: Number },
+            uploadedDocument: {type : Array},
+        };
     }
-    constructor(){
+    static get styles(){
+        return [
+            divStyles
+        ]
+    }
+    constructor() {
         super();
-        this.hideAddRequirement = false;
         this.index = 0;
     }
 
-    render(){
+    render() {
         return html`
-        
-                <div style="width:550px;padding-top:14px" ?hidden="${this.hideAddRequirement}" >
-                <vaadin-vertical-layout>
-                <span style="font-size : 14px;font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 
-                            'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'">Upload Requirement Document</span> 
-               
+        <style>
+            .mainDivRequirementUpload{
+                background:#F5F5F5;
+                width: 850px;
+                height: 100%;
+            }
+        </style>
+
+                <div class = "controlHeaderDark">
+                    Upload Requirement Document
+                </div>
+                <div class="mainDivRequirementUpload">
+                <div style ="padding:2px;">
+                    <vaadin-vertical-layout id="uploadDocument" theme="spacing-s">
                             <vaadin-button  theme="small"
                                             @click = "${this.onAddRequirementClick}">
-                                            <iron-icon icon="add-box"></iron-icon>
-                                            Add Requirement document                                            
+                                            <iron-icon icon="vaadin:plus"></iron-icon>
+                                            Add
                             </vaadin-button>
-                            
-                            
-                            <add-requirement-document   id="${this.index}" 
-                                                        ?hidden = "${this.hideAddRequirement}"   
-                                                        style="padding:20px"                                                     
-                                                       ></add-requirement-document>
-                    
-                    
-                </vaadin-vertical-layout>
+                    </vaadin-vertical-layout>
+                </div>
                 </div>
         `;
     }
-    onAddRequirementClick(){
+    isValid() {
+        var addReqElements = this.shadowRoot.querySelectorAll("add-requirement-document");
+        var errorMessage = "";
+        for (var i = 0; i < addReqElements.length; i++) {
+            var node = addReqElements[i];
+            errorMessage = node.isValid();
+            if (errorMessage !== "") {
+                break;
+            }
+        }
+        return errorMessage;
+    }
+    onAddRequirementClick() {
+        var newRequirement = document.createElement("add-requirement-document");
+        newRequirement.setAttribute("id", this.index);
+        this.shadowRoot.querySelector("vaadin-vertical-layout").appendChild(newRequirement);
+        this.requestUpdate();
         this.index = this.index + 1;
-        var newReq =  document.createElement("add-requirement-document");        
-        this.shadowRoot.appendChild(newReq);
+    }
 
+    get uploadedDocuments(){
+        var addReqElements = this.shadowRoot.querySelectorAll("add-requirement-document");
+        var uploadedReqDoc = new Array();
+        Array.prototype.forEach.call(addReqElements, function (node) {            
+            uploadedReqDoc.requirementTypeId = node.selectedRequirementTypeId;
+            uploadedReqDoc.document = node.selectedFileName;
+            uploadedReqDoc.push(uploadedReqDoc);            
+        });
+        return uploadedReqDoc;
+    }
+    attributeChangedCallback(name, oldVal, newVal) {
+        if (name === "uploadeddocument") {
+            var addReqElements = this.shadowRoot.querySelectorAll("add-requirement-document");
+            Array.prototype.forEach.call(addReqElements, function (node) {
+                node.parentNode.removeChild(node);
+            });
+            
+            super.attributeChangedCallback(name, oldVal, newVal);
+        }
     }
     
-    
+
 }
 customElements.define("upload-requirement-document", UploadRequirementDocument);

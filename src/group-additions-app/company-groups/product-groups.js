@@ -1,26 +1,29 @@
 import { LitElement, html } from "lit-element";
 import '@vaadin/vaadin-checkbox/vaadin-checkbox-group';
-import '../radio-group-dynamic';
+import '../custom-controls/radio-group-dynamic';
+import { divStyles } from '../group-addition-styles';
 
 class ProductGroups extends LitElement {
     static get properties() {
         return {
             productType: { type: String },
             groups: { type: Array },
-            selectedGroup: { type: String }, 
-            disabled: {type: Boolean}
+            selectedGroup: { type: String },
         };
+    }
+    static get styles() {
+        return [
+            divStyles
+        ]
     }
     render() {
         return html`
             <div style="background:#F5F5F5;height:100%; width:170px">
-                <div style="text-align:center; color: white; font-weight: bolder; background: url('/MWG_Apps/images/top_nav_bg_tile.gif') repeat-x; 
-                                height: 25px;line-height: 25px;border-radius:5px 5px 0px 0px;" >${this.productType}</div>
+                <div class="controlHeaderDark" >${this.productType}</div>
                 <div style="padding:15px">
                     <radio-group-dynamic .items = "${this.groups}" 
                                         @value-changed = "${(e) => this.radioGroupSelectedValueChanged(e)}"
-                                        .value = "${this.selectedGroup}"
-                                        ?disabled = "${this.disabled}"> </radio-group-dynamic>
+                                        .value = "${this.selectedGroup}"> </radio-group-dynamic>
                 </div>
             </div>
         `;
@@ -30,15 +33,6 @@ class ProductGroups extends LitElement {
         if (name === "groups" && newVal !== null && newVal !== undefined) {
             radioGroup.setAttribute("items", newVal);
         }
-        else if(name === "disabled"){
-            if(newVal=== "true"){
-                radioGroup.setAttribute("disabled", "true");
-            }
-            else{
-                radioGroup.removeAttribute("disabled");
-            }
-        }
-        radioGroup.requestUpdate();
         super.attributeChangedCallback(name, oldVal, newVal);
     }
     radioGroupSelectedValueChanged(e) {
